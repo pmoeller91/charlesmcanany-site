@@ -1,13 +1,14 @@
 {
-  "name": "nextplate",
-  "version": "2.2.2",
-  "description": "Nextjs and Tailwindcss boilerplate",
-  "author": "zeon.studio",
+  "name": "charlesmcanany-site",
+  "version": "0.1.0",
+  "description": "Charles McAnany personal website based on nextplate template by zeon.studio",
+  "author": "Patrick Moeller",
   "license": "MIT",
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "npm@10.2.4",
+  "private": "true",
   "scripts": {
-    "dev": "yarn generate-json && next dev",
-    "build": "yarn generate-json && next build",
+    "dev": "npm run generate-json && next dev",
+    "build": "npm run generate-json && next build",
     "preview": "next start",
     "postbuild": "next-sitemap",
     "lint": "next lint",
@@ -16,7 +17,7 @@
     "remove-darkmode": "node scripts/removeDarkmode.js && yarn format"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "dependencies": {
     "date-fns": "^3.3.1",
