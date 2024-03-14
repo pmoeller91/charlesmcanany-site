@@ -1,11 +1,11 @@
-import SearchModal from "@/components/SearchModal";
-import config from "@/config/config.json";
-import theme from "@/config/theme.json";
-import TwSizeIndicator from "@/helpers/TwSizeIndicator";
-import Footer from "@/partials/Footer";
-import Header from "@/partials/Header";
-import Providers from "@/partials/Providers";
-import "@/styles/main.scss";
+import SearchModal from "@/src/layouts/components/SearchModal";
+import config from "@/src/config/config.json";
+import theme from "@/src/config/theme.json";
+import TwSizeIndicator from "@/src/layouts/helpers/TwSizeIndicator";
+import Footer from "@/src/layouts/partials/Footer";
+import Header from "@/src/layouts/partials/Header";
+import Providers from "@/src/layouts/partials/Providers";
+import "@/src/styles/main.scss";
 
 export default function RootLayout({
   children,
@@ -26,7 +26,17 @@ export default function RootLayout({
         />
 
         {/* favicon */}
-        <link rel="shortcut icon" href={config.site.favicon} />
+        <link
+          rel="shortcut icon"
+          sizes="16x16 32x32 48x48"
+          href={config.site.favicon.favicon}
+        />
+        <link rel="icon" type="image/png" href={config.site.favicon.icon} />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href={config.site.favicon.appleTouchIcon}
+        />
         {/* theme meta */}
         <meta name="theme-name" content="nextplate" />
         <meta name="msapplication-TileColor" content="#000000" />
@@ -56,12 +66,15 @@ export default function RootLayout({
       </head>
 
       <body suppressHydrationWarning={true}>
+        <SearchModal />
         <TwSizeIndicator />
         <Providers>
-          <Header />
-          <SearchModal />
-          <main>{children}</main>
-          <Footer />
+          <div className="min-h-screen flex flex-col">
+            <Header />
+            <main>{children}</main>
+            <div className="flex-grow" />
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>

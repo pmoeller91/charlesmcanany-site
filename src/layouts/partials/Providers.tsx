@@ -1,6 +1,6 @@
 "use client";
 
-import config from "@/config/config.json";
+import config from "@/src/config/config.json";
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { plainify, titleify } from "@/lib/utils/textConverter";
+import { plainify, titleify } from "@/src/lib/utils/textConverter";
 import Image from "next/image";
 
 export interface ISearchItem {

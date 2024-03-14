@@ -1,4 +1,5 @@
 {
+  "$schema": "./menuSchema.json",
   "main": [
     {
       "name": "Home",
@@ -9,13 +10,8 @@
       "url": "/about"
     },
     {
-      "name": "Elements",
-      "url": "/elements"
-    },
-    {
       "name": "Pages",
       "url": "",
-      "hasChildren": true,
       "children": [
         {
           "name": "Contact",
@@ -44,14 +40,5 @@
       ]
     }
   ],
-  "footer": [
-    {
-      "name": "Elements",
-      "url": "/elements"
-    },
-    {
-      "name": "Privacy Policy",
-      "url": "/privacy-policy"
-    }
-  ]
+  "footer": []
 }

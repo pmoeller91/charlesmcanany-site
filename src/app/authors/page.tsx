@@ -1,8 +1,8 @@
-import AuthorCard from "@/components/AuthorCard";
-import { getListPage, getSinglePage } from "@/lib/contentParser";
-import PageHeader from "@/partials/PageHeader";
-import SeoMeta from "@/partials/SeoMeta";
-import { Author } from "@/types";
+import AuthorCard from "@/src/layouts/components/AuthorCard";
+import { getListPage, getSinglePage } from "@/src/lib/contentParser";
+import PageHeader from "@/src/layouts/partials/PageHeader";
+import SeoMeta from "@/src/layouts/partials/SeoMeta";
+import { Author } from "@/src/types";
 
 const Authors = () => {
   const authorIndex: Author = getListPage("authors/_index.md");

@@ -1,11 +1,11 @@
 "use client";
 
-import Logo from "@/components/Logo";
-import Social from "@/components/Social";
-import config from "@/config/config.json";
-import menu from "@/config/menu.json";
-import social from "@/config/social.json";
-import { markdownify } from "@/lib/utils/textConverter";
+import Logo from "@/src/layouts/components/Logo";
+import Social from "@/src/layouts/components/Social";
+import config from "@/src/config/config.json";
+import menu from "@/src/config/menu.json";
+import social from "@/src/config/social.json";
+import { markdownify } from "@/src/lib/utils/textConverter";
 import Link from "next/link";
 
 const Footer = () => {
@@ -19,13 +19,15 @@ const Footer = () => {
             <Logo />
           </div>
           <div className="mb-8 text-center lg:col-6 lg:mb-0">
-            <ul>
-              {menu.footer.map((menu) => (
-                <li className="m-3 inline-block" key={menu.name}>
-                  <Link href={menu.url}>{menu.name}</Link>
-                </li>
-              ))}
-            </ul>
+            {menu.footer.length > 0 && (
+              <ul>
+                {menu.footer.map((menu) => (
+                  <li className="m-3 inline-block" key={menu.name}>
+                    <Link href={menu.url}>{menu.name}</Link>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
           <div className="mb-8 text-center lg:col-3 lg:mb-0 lg:mt-0 lg:text-right">
             <Social source={social.main} className="social-icons" />
@@ -34,7 +36,7 @@ const Footer = () => {
       </div>
       <div className="border-t border-border py-7 dark:border-darkmode-border">
         <div className="container text-center text-light dark:text-darkmode-light">
-          <p dangerouslySetInnerHTML={markdownify(copyright)} />
+          <div dangerouslySetInnerHTML={markdownify(copyright)} />
         </div>
       </div>
     </footer>

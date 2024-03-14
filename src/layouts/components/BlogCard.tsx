@@ -1,8 +1,8 @@
-import config from "@/config/config.json";
-import ImageFallback from "@/helpers/ImageFallback";
-import dateFormat from "@/lib/utils/dateFormat";
-import { humanize, plainify, slugify } from "@/lib/utils/textConverter";
-import { Post } from "@/types";
+import config from "@/src/config/config.json";
+import ImageFallback from "@/src/layouts/helpers/ImageFallback";
+import dateFormat from "@/src/lib/utils/dateFormat";
+import { humanize, plainify, slugify } from "@/src/lib/utils/textConverter";
+import { Post } from "@/src/types";
 import Link from "next/link";
 import { FaRegFolder, FaRegUserCircle } from "react-icons/fa";
 

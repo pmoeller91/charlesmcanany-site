@@ -1,15 +1,14 @@
 {
   "site": {
-    "title": "Nextplate",
-    "base_url": "https://nextplate.netlify.app",
+    "title": "Charles McAnany's Site",
+    "base_url": "https://charlesmcanany.com",
     "base_path": "/",
     "trailing_slash": false,
-    "favicon": "/images/favicon.png",
-    "logo": "/images/logo.png",
-    "logo_darkmode": "/images/logo-darkmode.png",
-    "logo_width": "150",
-    "logo_height": "27",
-    "logo_text": "Nextplate"
+    "favicon": {
+      "favicon": "/images/favicon.ico",
+      "appleTouchIcon": "/images/apple-touch-icon-180x180.png",
+      "icon": "/images/favicon-192x192.png"
+    }
   },
 
   "settings": {

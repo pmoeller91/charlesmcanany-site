@@ -1,8 +1,8 @@
-import config from "@/config/config.json";
-import { getAllTaxonomy, getTaxonomy } from "@/lib/taxonomyParser";
-import { humanize } from "@/lib/utils/textConverter";
-import PageHeader from "@/partials/PageHeader";
-import SeoMeta from "@/partials/SeoMeta";
+import config from "@/src/config/config.json";
+import { getAllTaxonomy, getTaxonomy } from "@/src/lib/taxonomyParser";
+import { humanize } from "@/src/lib/utils/textConverter";
+import PageHeader from "@/src/layouts/partials/PageHeader";
+import SeoMeta from "@/src/layouts/partials/SeoMeta";
 import Link from "next/link";
 
 const Categories = () => {

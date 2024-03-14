@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 "use client";
 
-import { $ElementProps } from "@/lib/utils/ElementProps";
+import { $ElementProps } from "@/src/lib/utils/ElementProps";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface ImageFallbackProps extends $ElementProps<typeof Image> {
-  fallback: string;
+  fallback?: string;
 }
 
 const ImageFallback = (props: ImageFallbackProps) => {
@@ -16,6 +16,10 @@ const ImageFallback = (props: ImageFallbackProps) => {
   useEffect(() => {
     setImgSrc(src);
   }, [src]);
+
+  if (!fallback) {
+    return <Image {...rest} src={src} />;
+  }
 
   return (
     <Image

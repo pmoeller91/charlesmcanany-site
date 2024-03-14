@@ -1,5 +1,13 @@
 import { slug } from "github-slugger";
-import { marked } from "marked";
+import rehypeSanitize from "rehype-sanitize";
+import remarkGfm from "remark-gfm";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import remarkStringify from "remark-stringify";
+import stripMarkdown from "strip-markdown";
+import { unified } from "unified";
+import rehypeStringify from "rehype-stringify";
+import rehypeRaw from "rehype-raw";
 
 // slugify
 export const slugify = (content: string) => {
@@ -7,11 +15,16 @@ export const slugify = (content: string) => {
 };
 
 // markdownify
-export const markdownify = (content: string, div?: boolean) => {
-  const markdownContent: any = div
-    ? marked.parse(content)
-    : marked.parseInline(content);
-  return { __html: markdownContent };
+export const markdownify = (content: string) => {
+  let markdownContent = unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeSanitize)
+    .use(rehypeStringify)
+    .processSync(content);
+  return { __html: markdownContent.toString() };
 };
 
 // humanize
@@ -35,28 +48,10 @@ export const titleify = (content: string) => {
 
 // plainify
 export const plainify = (content: string) => {
-  const parseMarkdown: any = marked.parse(content);
-  const filterBrackets = parseMarkdown.replace(/<\/?[^>]+(>|$)/gm, "");
-  const filterSpaces = filterBrackets.replace(/[\r\n]\s*[\r\n]/gm, "");
-  const stripHTML = htmlEntityDecoder(filterSpaces);
-  return stripHTML;
-};
-
-// strip entities for plainify
-const htmlEntityDecoder = (htmlWithEntities: string): string => {
-  let entityList: { [key: string]: string } = {
-    "&nbsp;": " ",
-    "&lt;": "<",
-    "&gt;": ">",
-    "&amp;": "&",
-    "&quot;": '"',
-    "&#39;": "'",
-  };
-  let htmlWithoutEntities: string = htmlWithEntities.replace(
-    /(&amp;|&lt;|&gt;|&quot;|&#39;)/g,
-    (entity: string): string => {
-      return entityList[entity];
-    },
-  );
-  return htmlWithoutEntities;
+  const plainText = unified()
+    .use(remarkParse)
+    .use(stripMarkdown)
+    .use(remarkStringify)
+    .processSync(content);
+  return plainText.toString();
 };

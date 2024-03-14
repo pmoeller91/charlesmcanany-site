@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://raw.githubusercontent.com/pmoeller91/charlesmcanany-site/main/src/config/menuSchema.json",
+  "title": "Menu Entries",
+  "description": "Menu entries for the site",
+  "type": "object",
+  "properties": {
+    "main": {
+      "description": "Menu entries for the top navigation",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/menu_entry"
+      }
+    },
+    "footer": {
+      "description": "Menu entries for the footer navigation",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/menu_entry"
+      }
+    }
+  },
+  "$defs": {
+    "menu_entry": {
+      "type": "object",
+      "properties": {
+        "name": { "$ref": "#/$defs/menu_item_name" },
+        "url": { "$ref": "#/$defs/menu_item_url" },
+        "children": {
+          "description": "If present, turns navigation entry into a drop-down menu with potentially several sub-entries. May not have further children.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "$ref": "#/$defs/menu_item_name" },
+              "url": { "$ref": "#/$defs/menu_item_url" }
+            },
+            "required": ["name", "url"]
+          }
+        }
+      },
+      "required": ["name", "url"]
+    },
+    "menu_item_name": {
+      "description": "Title displayed for the link",
+      "type": "string"
+    },
+    "menu_item_url": {
+      "description": "URL the link should lead to",
+      "type": "string"
+    }
+  }
+}

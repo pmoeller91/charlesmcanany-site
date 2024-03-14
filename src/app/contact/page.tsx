@@ -1,8 +1,8 @@
-import config from "@/config/config.json";
-import { getListPage } from "@/lib/contentParser";
-import PageHeader from "@/partials/PageHeader";
-import SeoMeta from "@/partials/SeoMeta";
-import { RegularPage } from "@/types";
+import config from "@/src/config/config.json";
+import { getListPage } from "@/src/lib/contentParser";
+import PageHeader from "@/src/layouts/partials/PageHeader";
+import SeoMeta from "@/src/layouts/partials/SeoMeta";
+import { RegularPage } from "@/src/types";
 
 const Contact = async () => {
   const data: RegularPage = getListPage("contact/_index.md");

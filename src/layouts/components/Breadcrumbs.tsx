@@ -1,6 +1,6 @@
 "use client";
 
-import { humanize } from "@/lib/utils/textConverter";
+import { humanize } from "@/src/lib/utils/textConverter";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

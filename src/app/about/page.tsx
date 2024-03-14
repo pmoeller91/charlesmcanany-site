@@ -1,9 +1,9 @@
-import ImageFallback from "@/helpers/ImageFallback";
-import MDXContent from "@/helpers/MDXContent";
-import { getListPage } from "@/lib/contentParser";
-import { markdownify } from "@/lib/utils/textConverter";
-import SeoMeta from "@/partials/SeoMeta";
-import { RegularPage } from "@/types";
+import ImageFallback from "@/src/layouts/helpers/ImageFallback";
+import { MDContent } from "@/src/layouts/helpers/MDContent";
+import { getListPage } from "@/src/lib/contentParser";
+import { markdownify } from "@/src/lib/utils/textConverter";
+import SeoMeta from "@/src/layouts/partials/SeoMeta";
+import { RegularPage } from "@/src/types";
 
 const About = () => {
   const data: RegularPage = getListPage("about/_index.md");
@@ -36,7 +36,7 @@ const About = () => {
                 className="h3 mb-6"
               />
               <div className="content">
-                <MDXContent content={content} />
+                <MDContent content={content} />
               </div>
             </div>
           </div>

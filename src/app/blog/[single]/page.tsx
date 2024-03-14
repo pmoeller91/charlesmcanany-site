@@ -1,15 +1,15 @@
-import BlogCard from "@/components/BlogCard";
-import Disqus from "@/components/Disqus";
-import Share from "@/components/Share";
-import config from "@/config/config.json";
-import ImageFallback from "@/helpers/ImageFallback";
-import MDXContent from "@/helpers/MDXContent";
-import { getSinglePage } from "@/lib/contentParser";
-import dateFormat from "@/lib/utils/dateFormat";
-import similerItems from "@/lib/utils/similarItems";
-import { humanize, markdownify, slugify } from "@/lib/utils/textConverter";
-import SeoMeta from "@/partials/SeoMeta";
-import { Post } from "@/types";
+import BlogCard from "@/src/layouts/components/BlogCard";
+import Disqus from "@/src/layouts/components/Disqus";
+import Share from "@/src/layouts/components/Share";
+import config from "@/src/config/config.json";
+import ImageFallback from "@/src/layouts/helpers/ImageFallback";
+import { MDContent } from "@/src/layouts/helpers/MDContent";
+import { getSinglePage } from "@/src/lib/contentParser";
+import dateFormat from "@/src/lib/utils/dateFormat";
+import similerItems from "@/src/lib/utils/similarItems";
+import { humanize, markdownify, slugify } from "@/src/lib/utils/textConverter";
+import SeoMeta from "@/src/layouts/partials/SeoMeta";
+import { Post } from "@/src/types";
 import Link from "next/link";
 import { FaRegClock, FaRegFolder, FaRegUserCircle } from "react-icons/fa";
 
@@ -100,7 +100,7 @@ const PostSingle = ({ params }: { params: { single: string } }) => {
                 )}
               </ul>
               <div className="content mb-10">
-                <MDXContent content={content} />
+                <MDContent content={content ?? ""} />
               </div>
               <div className="row items-start justify-between">
                 <div className="mb-10 flex items-center lg:col-5 lg:mb-0">

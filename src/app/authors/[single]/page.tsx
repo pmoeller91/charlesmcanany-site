@@ -1,12 +1,12 @@
-import BlogCard from "@/components/BlogCard";
-import Social from "@/components/Social";
-import config from "@/config/config.json";
-import ImageFallback from "@/helpers/ImageFallback";
-import MDXContent from "@/helpers/MDXContent";
-import { getSinglePage } from "@/lib/contentParser";
-import { slugify } from "@/lib/utils/textConverter";
-import SeoMeta from "@/partials/SeoMeta";
-import { Author, Post } from "@/types";
+import BlogCard from "@/src/layouts/components/BlogCard";
+import Social from "@/src/layouts/components/Social";
+import config from "@/src/config/config.json";
+import ImageFallback from "@/src/layouts/helpers/ImageFallback";
+import { MDContent } from "@/src/layouts/helpers/MDContent";
+import { getSinglePage } from "@/src/lib/contentParser";
+import { slugify } from "@/src/lib/utils/textConverter";
+import SeoMeta from "@/src/layouts/partials/SeoMeta";
+import { Author, Post } from "@/src/types";
 
 // remove dynamicParams
 export const dynamicParams = false;
@@ -56,7 +56,7 @@ const AuthorSingle = ({ params }: { params: { single: string } }) => {
               )}
               <h1 className="h3 mb-6">{title}</h1>
               <div className="content">
-                <MDXContent content={content} />
+                <MDContent content={content ?? ""} />
               </div>
               <Social source={social} className="social-icons" />
             </div>
