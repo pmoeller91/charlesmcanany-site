@@ -5,11 +5,9 @@ import ThemeSwitcher from "@/src/layouts/components/ThemeSwitcher";
 import config from "@/src/config/config.json";
 import menuConfig from "@/src/config/menu.json";
 import clsx from "clsx";
-import { link } from "fs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect } from "react";
-import { IoSearch } from "react-icons/io5";
+import React, { useEffect, useState } from "react";
 
 //  child navigation link interface
 export interface IChildNavigationLink {
@@ -27,14 +25,12 @@ export interface INavigationLink {
 const Header = () => {
   // distructuring the main menu from menu object
   const { main }: { main: INavigationLink[] } = menuConfig;
-  const { navigation_button, settings } = config;
+  const { settings } = config;
+
   // get current path
   const pathname = usePathname();
 
-  // scroll to top on route change
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, [pathname]);
+  const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
   return (
     <header
@@ -42,11 +38,19 @@ const Header = () => {
     >
       <nav className="navbar container">
         {/* logo */}
-        <div className="order-0 h-12">
-          <Logo />
+        <div className="order-0 h-auto">
+          <Logo className="max-h-12 w-auto max-w-[33vw]" />
         </div>
         {/* navbar toggler */}
-        <input id="nav-toggle" type="checkbox" className="hidden" />
+        <input
+          id="nav-toggle"
+          type="checkbox"
+          className="hidden"
+          checked={openMobileMenu}
+          onChange={() => {
+            setOpenMobileMenu((isMenuOpen) => !isMenuOpen);
+          }}
+        />
         <label
           htmlFor="nav-toggle"
           className="order-3 cursor-pointer flex items-center lg:hidden text-dark dark:text-white lg:order-1"
@@ -71,16 +75,20 @@ const Header = () => {
             ></polygon>
           </svg>
         </label>
-        {/* /navbar toggler */}
-
         <ul
           id="nav-menu"
-          className="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8"
+          className={clsx(
+            "navbar-nav order-3 w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8",
+            { hidden: !openMobileMenu },
+          )}
         >
-          {main.map((menuItem, i) => (
-            <React.Fragment key={`menu-${i}`}>
-              {menuItem.children && menuItem.children.length > 0 ? (
-                <li className="nav-item nav-dropdown group relative">
+          {main.map((menuItem, i) => {
+            if (menuItem.children && menuItem.children.length > 0) {
+              return (
+                <li
+                  className="nav-item nav-dropdown group relative"
+                  key={`menu-${i}`}
+                >
                   <span
                     className={clsx([
                       "nav-link",
@@ -115,52 +123,27 @@ const Header = () => {
                     ))}
                   </ul>
                 </li>
-              ) : (
-                <li className="nav-item">
-                  <Link
-                    href={menuItem.url}
-                    className={clsx([
-                      "nav-link",
-                      "block",
-                      { active: `${menuItem.url}/`.includes(pathname) },
-                    ])}
-                  >
-                    {menuItem.name}
-                  </Link>
-                </li>
-              )}
-            </React.Fragment>
-          ))}
-          {navigation_button.enable && (
-            <li className="mt-4 inline-block lg:hidden">
-              <Link
-                className="btn btn-outline-primary btn-sm"
-                href={navigation_button.link}
-              >
-                {navigation_button.label}
-              </Link>
-            </li>
-          )}
+              );
+            }
+            return (
+              <li className="nav-item" key={`menu-${i}`}>
+                <Link
+                  href={menuItem.url}
+                  className={clsx([
+                    "nav-link",
+                    "block",
+                    { active: `${menuItem.url}/`.includes(pathname) },
+                  ])}
+                >
+                  {menuItem.name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
+        <div className="order-1 flex-grow" />
         <div className="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
-          {settings.search && (
-            <button
-              className="border-border text-dark hover:text-primary dark:border-darkmode-border mr-5 inline-block border-r pr-5 text-xl dark:text-white dark:hover:text-darkmode-primary"
-              aria-label="search"
-              data-search-trigger
-            >
-              <IoSearch />
-            </button>
-          )}
           <ThemeSwitcher className="mr-5" />
-          {navigation_button.enable && (
-            <Link
-              className="btn btn-outline-primary btn-sm hidden lg:inline-block"
-              href={navigation_button.link}
-            >
-              {navigation_button.label}
-            </Link>
-          )}
         </div>
       </nav>
     </header>

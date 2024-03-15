@@ -1,4 +1,3 @@
-import SearchModal from "@/src/layouts/components/SearchModal";
 import config from "@/src/config/config.json";
 import theme from "@/src/config/theme.json";
 import TwSizeIndicator from "@/src/layouts/helpers/TwSizeIndicator";
@@ -17,7 +16,7 @@ export default function RootLayout({
   const sf = theme.fonts.font_family.secondary;
 
   return (
-    <html suppressHydrationWarning={true} lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* responsive meta */}
         <meta
@@ -66,7 +65,6 @@ export default function RootLayout({
       </head>
 
       <body suppressHydrationWarning={true}>
-        <SearchModal />
         <TwSizeIndicator />
         <Providers>
           <div className="min-h-screen flex flex-col">

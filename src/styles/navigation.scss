@@ -7,17 +7,13 @@ input#nav-toggle:checked + label #hide-button {
   @apply block;
 }
 
-input#nav-toggle:checked ~ #nav-menu {
-  @apply block;
-}
-
 .header {
   @apply bg-body py-6 dark:bg-darkmode-body;
 }
 
 // navbar items
 .navbar {
-  @apply relative flex flex-wrap items-center justify-between;
+  @apply relative flex flex-wrap items-center justify-between gap-12;
 }
 
 .navbar-brand {

@@ -1,5 +1,3 @@
-"use client";
-
 import Logo from "@/src/layouts/components/Logo";
 import Social from "@/src/layouts/components/Social";
 import config from "@/src/config/config.json";
@@ -16,7 +14,7 @@ const Footer = () => {
       <div className="container">
         <div className="row items-center py-10">
           <div className="mb-8 text-center lg:col-3 lg:mb-0 lg:text-left">
-            <Logo />
+            <Logo className="max-w-[80vw] m-auto w-auto max-h-16 lg:h-12" />
           </div>
           <div className="mb-8 text-center lg:col-6 lg:mb-0">
             {menu.footer.length > 0 && (

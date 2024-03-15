@@ -15,16 +15,24 @@ export const slugify = (content: string) => {
 };
 
 // markdownify
-export const markdownify = (content: string) => {
-  let markdownContent = unified()
+export const markdownify = (content: string, sanitize = false) => {
+  const markdownContent = unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeRaw)
-    .use(rehypeSanitize)
+    .use(rehypeRaw);
+  if (sanitize) {
+    const sanitizedContent = markdownContent
+      .use(rehypeSanitize)
+      .use(rehypeStringify)
+      .processSync(content)
+      .toString();
+    return { __html: sanitizedContent };
+  }
+  const unsanitizedContent = markdownContent
     .use(rehypeStringify)
     .processSync(content);
-  return { __html: markdownContent.toString() };
+  return { __html: unsanitizedContent.toString() };
 };
 
 // humanize

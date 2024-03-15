@@ -12,35 +12,18 @@
   },
 
   "settings": {
-    "search": true,
     "sticky_header": true,
     "theme_switcher": true,
-    "default_theme": "system",
-    "pagination": 2,
-    "summary_length": 200,
-    "blog_folder": "blog"
+    "default_theme": "system"
   },
 
   "params": {
-    "contact_form_action": "#",
-    "copyright": "Designed And Developed by [Zeon Studio](https://zeon.studio)"
-  },
-
-  "navigation_button": {
-    "enable": true,
-    "label": "Get Started",
-    "link": "https://github.com/zeon-studio/nextplate"
-  },
-
-  "disqus": {
-    "enable": true,
-    "shortname": "themefisher-template",
-    "settings": {}
+    "copyright": "Original design by [Zeon Studio](https://zeon.studio)\r\n\r\nModified and adapted by Patrick Moeller\r\n\r\nContent copyright Charles McAnany"
   },
 
   "metadata": {
-    "meta_author": "Themefisher",
+    "meta_author": "Charles McAnany",
     "meta_image": "/images/og-image.png",
-    "meta_description": "Next Boilerplate"
+    "meta_description": "Charles McAny's Site"
   }
 }

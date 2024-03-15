@@ -8,7 +8,11 @@ import { useEffect, useState } from "react";
 import logo from "@/public/images/logo.png";
 import logoDark from "@/public/images/logo-darkmode.png";
 
-const Logo = () => {
+interface LogoProps {
+  className?: string;
+}
+
+const Logo = ({ className }: LogoProps) => {
   // destructuring items from config object
   const {
     title,
@@ -25,7 +29,7 @@ const Logo = () => {
 
   return (
     <Link href="/" className="navbar-brand">
-      <Image src={resolvedLogo} alt={title} priority />
+      <Image src={resolvedLogo} alt={title} className={className} priority />
     </Link>
   );
 };

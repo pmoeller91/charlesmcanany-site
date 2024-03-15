@@ -12,12 +12,6 @@ const About = () => {
 
   return (
     <>
-      <SeoMeta
-        title={title}
-        meta_title={meta_title}
-        description={description}
-        image={image}
-      />
       <section className="section-sm">
         <div className="container">
           <div className="row justify-center">
@@ -42,6 +36,12 @@ const About = () => {
           </div>
         </div>
       </section>
+      <SeoMeta
+        title={title}
+        meta_title={meta_title}
+        description={description}
+        image={image}
+      />
     </>
   );
 };
