@@ -1,14 +1,14 @@
 import Logo from "@/src/components/Logo";
 import Social from "@/src/components/Social";
 import config from "@/src/config/config.json";
-import menu from "@/src/config/menu.json";
+import menuJson from "@/src/config/menu.json";
 import social from "@/src/config/social.json";
 import { markdownify } from "@/src/lib/utils/textConverter";
 import Link from "next/link";
-import { NavigationLink } from "../../types/NavigationLink";
+import { NavigationMenu } from "@/src/types/Navigation";
 
 const Footer = () => {
-  const { footer }: { footer: NavigationLink[] } = menu;
+  const menu = menuJson as NavigationMenu;
   const { copyright } = config.params;
 
   return (
@@ -21,9 +21,9 @@ const Footer = () => {
           <div className="mb-8 text-center lg:col-6 lg:mb-0">
             {menu.footer.length > 0 && (
               <ul>
-                {footer.map((menu) => (
-                  <li className="m-3 inline-block" key={menu.name}>
-                    <Link href={menu.url}>{menu.name}</Link>
+                {menu.footer.map((menuEntry) => (
+                  <li className="m-3 inline-block" key={menuEntry.name}>
+                    <Link href={menuEntry.url}>{menuEntry.name}</Link>
                   </li>
                 ))}
               </ul>

@@ -3,16 +3,21 @@
 import Logo from "@/src/components/Logo";
 import ThemeSwitcher from "@/src/components/ThemeSwitcher";
 import config from "@/src/config/config.json";
-import menuConfig from "@/src/config/menu.json";
-import { NavigationLink } from "@/src/types/NavigationLink";
+import menuJson from "@/src/config/menu.json";
+import {
+  NavigationMenu,
+  isNavigationCategory,
+  isNavigationLink,
+} from "@/src/types/Navigation";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const Header = () => {
-  // distructuring the main menu from menu object
-  const { main }: { main: NavigationLink[] } = menuConfig;
+  // Destructuring main menu config from navigation config
+  const { main } = menuJson as NavigationMenu;
+
   const { settings } = config;
 
   // get current path
@@ -71,7 +76,10 @@ const Header = () => {
           )}
         >
           {main.map((menuItem, i) => {
-            if (menuItem.children && menuItem.children.length > 0) {
+            if (
+              isNavigationCategory(menuItem) &&
+              menuItem.children.length > 0
+            ) {
               return (
                 <li
                   className="nav-item nav-dropdown group relative"
@@ -112,21 +120,22 @@ const Header = () => {
                   </ul>
                 </li>
               );
+            } else if (isNavigationLink(menuItem)) {
+              return (
+                <li className="nav-item" key={`menu-${i}`}>
+                  <Link
+                    href={menuItem.url}
+                    className={clsx([
+                      "nav-link",
+                      "block",
+                      { active: `${menuItem.url}/`.includes(pathname) },
+                    ])}
+                  >
+                    {menuItem.name}
+                  </Link>
+                </li>
+              );
             }
-            return (
-              <li className="nav-item" key={`menu-${i}`}>
-                <Link
-                  href={menuItem.url}
-                  className={clsx([
-                    "nav-link",
-                    "block",
-                    { active: `${menuItem.url}/`.includes(pathname) },
-                  ])}
-                >
-                  {menuItem.name}
-                </Link>
-              </li>
-            );
           })}
         </ul>
         <div className="order-1 flex-grow" />
