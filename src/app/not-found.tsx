@@ -1,4 +1,4 @@
-import SeoMeta from "@/src/layouts/partials/SeoMeta";
+import SeoMeta from "@/src/components/partials/SeoMeta";
 import Link from "next/link";
 
 const NotFound = async () => {

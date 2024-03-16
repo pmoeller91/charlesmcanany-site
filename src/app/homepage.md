@@ -4,12 +4,11 @@ meta_title: "Charles Mcanany's Site"
 description: "Charles McAnany's Personal Website"
 draft: false
 ---
-
 This is Charles McAnany's little place on the web.
 
 Perhaps you were looking for:
 
-Some of my photographs
+[Some of my photographs](/photos)
 
 You want to contact me? You're in luck. You already have your own personal charlesmcanany.com <span className="whitespace-nowrap">e-mail</span> address!
 

@@ -8,6 +8,10 @@
     {
       "name": "About",
       "url": "/about"
+    },
+    {
+      "name": "Photos",
+      "url": "/photos"
     }
   ],
   "footer": []

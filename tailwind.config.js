@@ -24,7 +24,7 @@ if (theme.fonts.font_family.secondary) {
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/layouts/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/content/**/*.{md,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx}",
   ],
@@ -66,7 +66,6 @@ module.exports = {
         },
       },
       fontSize: {
-        base: "medium",
         h1: h1 + "rem",
         "h1-sm": h1 * 0.8 + "rem",
         h2: h2 + "rem",

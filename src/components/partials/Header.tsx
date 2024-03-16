@@ -1,30 +1,18 @@
 "use client";
 
-import Logo from "@/src/layouts/components/Logo";
-import ThemeSwitcher from "@/src/layouts/components/ThemeSwitcher";
+import Logo from "@/src/components/Logo";
+import ThemeSwitcher from "@/src/components/ThemeSwitcher";
 import config from "@/src/config/config.json";
 import menuConfig from "@/src/config/menu.json";
+import { NavigationLink } from "@/src/types/NavigationLink";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-//  child navigation link interface
-export interface IChildNavigationLink {
-  name: string;
-  url: string;
-}
-
-// navigation link interface
-export interface INavigationLink {
-  name: string;
-  url: string;
-  children?: IChildNavigationLink[];
-}
-
 const Header = () => {
   // distructuring the main menu from menu object
-  const { main }: { main: INavigationLink[] } = menuConfig;
+  const { main }: { main: NavigationLink[] } = menuConfig;
   const { settings } = config;
 
   // get current path

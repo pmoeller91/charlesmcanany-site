@@ -1,8 +1,8 @@
-import { MDContent } from "@/src/layouts/helpers/MDContent";
+import { MDContent } from "@/src/components/helpers/MDContent";
 import { getSinglePage } from "@/src/lib/contentParser";
-import PageHeader from "@/src/layouts/partials/PageHeader";
-import SeoMeta from "@/src/layouts/partials/SeoMeta";
-import { RegularPage } from "@/src/types";
+import PageHeader from "@/src/components/partials/PageHeader";
+import SeoMeta from "@/src/components/partials/SeoMeta";
+import { RegularPage } from "@/src/types/RegularPage";
 import { notFound } from "next/navigation";
 
 // remove dynamicParams

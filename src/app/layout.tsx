@@ -1,9 +1,9 @@
 import config from "@/src/config/config.json";
 import theme from "@/src/config/theme.json";
-import TwSizeIndicator from "@/src/layouts/helpers/TwSizeIndicator";
-import Footer from "@/src/layouts/partials/Footer";
-import Header from "@/src/layouts/partials/Header";
-import Providers from "@/src/layouts/partials/Providers";
+import TwSizeIndicator from "@/src/components/helpers/TwSizeIndicator";
+import Footer from "@/src/components/partials/Footer";
+import Header from "@/src/components/partials/Header";
+import Providers from "@/src/components/partials/Providers";
 import "@/src/styles/main.scss";
 
 export default function RootLayout({

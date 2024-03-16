@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/src/layouts/components/Breadcrumbs";
+import Breadcrumbs from "@/src/components/Breadcrumbs";
 import { humanize } from "@/src/lib/utils/textConverter";
 
 const PageHeader = ({ title }: { title: string }) => {
