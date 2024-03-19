@@ -32,6 +32,9 @@ input#nav-toggle:checked + label #hide-button {
 // }
 
 .nav-link {
+  &.active {
+    @apply underline;
+  }
   @apply text-dark hover:text-primary dark:text-darkmode-dark dark:hover:text-darkmode-primary block p-3 font-semibold transition lg:px-2 lg:py-3;
 }
 

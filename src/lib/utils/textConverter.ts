@@ -63,3 +63,7 @@ export const plainify = (content: string) => {
     .processSync(content);
   return plainText.toString();
 };
+
+export const urlify = (content: string) => {
+  return content.replace(/\s+/g, '_');
+}

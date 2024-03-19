@@ -28,7 +28,7 @@ const About = () => {
                 dangerouslySetInnerHTML={markdownify(title)}
                 className="h3 mb-6"
               />
-              <div className="content leading-relaxed">
+              <div className="content prose-p:leading-relaxed">
                 <MDContent content={content} />
               </div>
             </div>

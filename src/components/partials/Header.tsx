@@ -91,8 +91,8 @@ const Header = () => {
                       "inline-flex",
                       "items-center",
                       {
-                        active: menuItem.children.some((menuItem) =>
-                          `${menuItem.url}/`.includes(pathname),
+                        active: menuItem.children.some(
+                          (menuItem) => `${menuItem.url}/` === pathname,
                         ),
                       },
                     ])}
@@ -128,7 +128,7 @@ const Header = () => {
                     className={clsx([
                       "nav-link",
                       "block",
-                      { active: `${menuItem.url}/`.includes(pathname) },
+                      { active: menuItem.url === pathname },
                     ])}
                   >
                     {menuItem.name}
