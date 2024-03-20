@@ -2,7 +2,6 @@
 title: "Charles McAnany's Site"
 meta_title: "Charles Mcanany's Site"
 description: "Charles McAnany's Personal Website"
-draft: false
 ---
 This is Charles McAnany's little place on the web.
 

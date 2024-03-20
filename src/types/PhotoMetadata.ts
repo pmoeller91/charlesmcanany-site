@@ -26,3 +26,8 @@ export interface GeneratedPhotoData {
 export interface CombinedPhotoData extends UserPhotoData, GeneratedPhotoData {
   metadata: PhotoMetadata;
 }
+
+export interface PhotoGallery<T> {
+  photos?: T[];
+  directories?: Record<string, PhotoGallery<T>>;
+}

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import type { IconType } from "react-icons";
+import type { IconBaseProps, IconType } from "react-icons";
 import * as FaIcons6 from "react-icons/fa6";
 // import * as AiIcons from "react-icons/ai";
 // import * as BsIcons from "react-icons/bs";
@@ -11,16 +11,15 @@ import * as FaIcons6 from "react-icons/fa6";
 
 type IconMap = Record<string, IconType>;
 
-interface IDynamicIcon extends React.SVGProps<SVGSVGElement> {
+interface IDynamicIcon extends IconBaseProps {
   icon: string;
-  className?: string;
 }
 
 const iconLibraries: { [key: string]: IconMap } = {
   fa: FaIcons6,
 };
 
-const DynamicIcon: FC<IDynamicIcon> = ({ icon, ...props }) => {
+const DynamicIcon: FC<IDynamicIcon> = ({ icon, title, ...props }) => {
   const IconLibrary = getIconLibrary(icon);
   const Icon = IconLibrary ? IconLibrary[icon] : undefined;
 
@@ -28,7 +27,16 @@ const DynamicIcon: FC<IDynamicIcon> = ({ icon, ...props }) => {
     return <span className="text-sm">Icon not found</span>;
   }
 
-  return <Icon {...props} />;
+  const accessibilityProps: Partial<IconBaseProps> = {
+    role: "img",
+  };
+  if (title) {
+    accessibilityProps.title = title;
+  } else {
+    accessibilityProps["aria-hidden"] = "true";
+  }
+
+  return <Icon {...props} {...accessibilityProps} />;
 };
 
 const getIconLibrary = (icon: string): IconMap | undefined => {

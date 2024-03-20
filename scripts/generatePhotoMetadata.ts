@@ -3,16 +3,18 @@ import type {
   PhotoMetadata,
   UserPhotoData,
   CombinedPhotoData,
+  PhotoGallery,
 } from "@/src/types/PhotoMetadata";
 import { urlify } from "@/src/lib/utils/textConverter";
-import { keyBy } from "lodash";
+import { keyBy, mapValues, zip, zipObject } from "lodash";
 import fsPromises from "fs/promises";
 import path from "node:path";
 import Sharp from "sharp";
 import { exiftool } from "exiftool-vendored";
-import userPhotoDataJson from "@/src/photos/photoData.json";
+import unprocessedUserPhotoDataJson from "@/src/photos/photoData.json";
 
-const userPhotoData = userPhotoDataJson as UserPhotoData[];
+const unprocessedUserPhotoData =
+  unprocessedUserPhotoDataJson as PhotoGallery<UserPhotoData>;
 
 const outputJson = ".json/photoMetadata.json";
 
@@ -34,46 +36,72 @@ function getCreateDate(exifData: Tags) {
     return `${createDate.year}-${createDate.month.toString().padStart(2, "0")}-${createDate.day.toString().padStart(2, "0")}`;
 }
 
+// Generates a unique slug for each photo, used for routing in the gallery. Effectively a web filename.
+function getSlug(userData: UserPhotoData, metadata: PhotoMetadata) {
+  if (userData.title) {
+    return urlify(userData.title);
+  }
+  if (metadata.exifData.createDate) {
+    return urlify(`Untitled - ${metadata.exifData.createDate}`);
+  }
+  return path.basename(encodeURIComponent(userData.path));
+}
+
+// For each photo, combines the user-provided photo information with the extracted photo metadata.
 async function combinePhotoData(
-  userPhotoData: UserPhotoData[],
-  photoMetadata: PhotoMetadata[],
-): Promise<Record<string, CombinedPhotoData>> {
-  const keyedPhotoMetadata = keyBy(
-    photoMetadata,
-    (photoMetadatum) => photoMetadatum.path,
+  userPhotoData: UserPhotoData[] | undefined,
+  photoMetadata: PhotoMetadata[] | undefined,
+): Promise<CombinedPhotoData[] | undefined> {
+  if (!userPhotoData || !photoMetadata) {
+    return undefined;
+  }
+
+  const keyedUserPhotoData = keyBy(
+    userPhotoData,
+    (userPhotoDatum) => userPhotoDatum.path,
   );
 
-  const combinedPhotoData: CombinedPhotoData[] = userPhotoData.map(
-    (userPhotoDatum) => ({
-      ...userPhotoDatum,
-      slug: userPhotoDatum.title
-        ? urlify(userPhotoDatum.title)
-        : urlify(userPhotoDatum.path),
-      metadata: keyedPhotoMetadata[userPhotoDatum.path],
+  const combinedPhotoData: CombinedPhotoData[] = photoMetadata.map(
+    (photoMetadatum) => ({
+      ...keyedUserPhotoData[photoMetadatum.path],
+      slug: getSlug(keyedUserPhotoData[photoMetadatum.path], photoMetadatum),
+      metadata: photoMetadatum,
     }),
   );
 
-  return keyBy(
-    combinedPhotoData,
-    (combinedPhotoDatum) => combinedPhotoDatum.slug,
-  );
+  return combinedPhotoData;
 }
 
-(async () => {
-  const photos = userPhotoData.map((userPhotoDatum) => userPhotoDatum.path);
+// Uses sharp and exiftool-vendored to extract metadata from each photo file
+async function getPhotoMetadata(
+  userPhotoData: UserPhotoData[] | undefined,
+): Promise<PhotoMetadata[] | undefined> {
+  if (!userPhotoData) {
+    return undefined;
+  }
 
-  const metadataPromises: Promise<PhotoMetadata>[] = photos.map(
-    async (photoName) => {
-      const absolutePhotoPath = path.join("./public", photoName);
-      const photoPath = path.join(
+  const photoPaths = userPhotoData.map((userPhotoDatum) => userPhotoDatum.path);
+
+  const metadataPromises: Promise<PhotoMetadata | undefined>[] = photoPaths.map(
+    async (photoPath) => {
+      const localPhotoPath = path.join("./public", photoPath);
+      const serverPhotoPath = path.join(
         "/",
-        path.relative("./public/", absolutePhotoPath),
+        path.relative("./public/", localPhotoPath),
       );
-      const photo = await fsPromises.readFile(absolutePhotoPath);
+      try {
+        await fsPromises.access(localPhotoPath, fsPromises.constants.R_OK);
+      } catch (e) {
+        console.error(
+          `Failed to access photo at path: "${path.resolve(localPhotoPath)}". ${e instanceof Error ? e.toString() : "Unknown Error"}`,
+        );
+        return undefined;
+      }
+      const photo = await fsPromises.readFile(localPhotoPath);
       const sharpPhotoMetadata = await Sharp(photo).metadata();
-      const photoExif = await exiftool.read(absolutePhotoPath);
+      const photoExif = await exiftool.read(localPhotoPath);
       return {
-        path: photoPath,
+        path: serverPhotoPath,
         width: sharpPhotoMetadata.width || 0,
         height: sharpPhotoMetadata.height || 0,
         exifData: {
@@ -89,7 +117,9 @@ async function combinePhotoData(
     },
   );
 
-  const metadata = await Promise.all(metadataPromises);
+  const metadata = (await Promise.all(metadataPromises)).filter(
+    (metadata): metadata is PhotoMetadata => !!metadata,
+  );
   const filteredMetadata = metadata.filter(({ height, width }) => {
     if (height <= 0 || height > 65535) {
       return false;
@@ -100,20 +130,70 @@ async function combinePhotoData(
     return true;
   });
 
-  const combinedPhotoData = await combinePhotoData(
-    userPhotoData,
-    filteredMetadata,
+  return filteredMetadata;
+}
+
+// A photo gallery has photos and directories. Begins with photos containing
+// only the user-provided data for each photo. This function then recursively
+// gathers metadata for each photo file and combines that with user data for
+// every photo in each directory.
+async function processGallery(gallery: PhotoGallery<UserPhotoData>): Promise<{
+  processedGallery: PhotoGallery<CombinedPhotoData>;
+  totalPhotos: number;
+}> {
+  const metadata = await getPhotoMetadata(gallery.photos);
+  const combinedMetadata = await combinePhotoData(gallery.photos, metadata);
+  const photosProcessed = combinedMetadata?.length ?? 0;
+
+  if (!gallery.directories) {
+    return {
+      processedGallery: {
+        photos: combinedMetadata,
+      },
+      totalPhotos: photosProcessed,
+    };
+  }
+
+  const directoryKeys = Object.keys(gallery.directories);
+  const processedGalleries = await Promise.all(
+    Object.values(gallery.directories).map((directory) =>
+      processGallery(directory),
+    ),
+  );
+
+  const totalPhotos =
+    processedGalleries.reduce(
+      (sum, processedGallery) => sum + processedGallery.totalPhotos,
+      0,
+    ) + photosProcessed;
+
+  const processedDirectories = zipObject(
+    directoryKeys,
+    processedGalleries.map(
+      (processedGallery) => processedGallery.processedGallery,
+    ),
+  );
+  return {
+    processedGallery: {
+      photos: combinedMetadata,
+      directories: processedDirectories,
+    },
+    totalPhotos,
+  };
+}
+
+(async () => {
+  const { processedGallery, totalPhotos } = await processGallery(
+    unprocessedUserPhotoData,
   );
 
   // Create JSON directory if it does not exist
   await fsPromises.mkdir(path.dirname(outputJson), { recursive: true });
   const jsonFile = await fsPromises.open(outputJson, "w");
 
-  await jsonFile.writeFile(JSON.stringify(combinedPhotoData, undefined, 4));
+  await jsonFile.writeFile(JSON.stringify(processedGallery, undefined, 4));
 
-  console.log(
-    `Successfully output JSON metadata for ${Object.keys(combinedPhotoData).length} photos.`,
-  );
+  console.log(`Successfully output JSON metadata for ${totalPhotos} photos.`);
 
   await exiftool.end();
 })();

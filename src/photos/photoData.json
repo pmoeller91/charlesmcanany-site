@@ -1,12 +1,24 @@
-[
-  {
-    "title": "Some Photo",
-    "path": "/images/photos/IMG_2380.JPG",
-    "description": "Blah blah blah"
-  },
-  {
-    "title": "Some Other Photo",
-    "path": "/images/photos/IMG_7925.JPG",
-    "description": "More blah blah blah"
+{
+  "directories": {
+    "person": {
+      "photos": [
+        {
+          "path": "/images/photos/smile.png"
+        },
+        {
+          "path": "/images/photos/IMG_2380.JPG",
+          "description": "Blah blah blah"
+        }
+      ]
+    },
+    "other person": {
+      "photos": [
+        {
+          "title": "Some Other Photo",
+          "path": "/images/photos/IMG_7925.JPG",
+          "description": "More blah blah blah"
+        }
+      ]
+    }
   }
-]
+}

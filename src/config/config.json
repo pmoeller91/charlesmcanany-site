@@ -1,14 +1,10 @@
 {
   "site": {
-    "title": "Charles McAnany's Site",
+    "title": "CharlesMcAnany.com",
     "base_url": "https://charlesmcanany.com",
     "base_path": "/",
     "trailing_slash": false,
-    "favicon": {
-      "favicon": "/images/favicon.ico",
-      "appleTouchIcon": "/images/apple-touch-icon-180x180.png",
-      "icon": "/images/favicon-192x192.png"
-    }
+    "favicon": "/images/favicon.ico"
   },
 
   "settings": {

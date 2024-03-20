@@ -18,7 +18,7 @@ const About = () => {
           <div className="row justify-center">
             <div className="text-center md:col-10 lg:col-7">
               <Image
-                className="mx-auto mb-6 rounded-lg shadow-xl"
+                className="mx-auto mb-6 rounded-lg shadow-lg shadow-gray-400 dark:shadow-lg dark:shadow-gray-800"
                 src={CharlesImage}
                 width={200}
                 height={200}
