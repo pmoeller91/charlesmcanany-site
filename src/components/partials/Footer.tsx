@@ -6,10 +6,11 @@ import social from "@/src/config/social.json";
 import { markdownify } from "@/src/lib/utils/textConverter";
 import Link from "next/link";
 import { NavigationMenu } from "@/src/types/Navigation";
+import { getListPage } from "@/src/lib/contentParser";
 
 const Footer = () => {
   const menu = menuJson as NavigationMenu;
-  const { copyright } = config.params;
+  const { content } = getListPage("copyright.md");
 
   return (
     <footer className="mt-8 bg-theme-light dark:bg-darkmode-theme-light">
@@ -36,7 +37,7 @@ const Footer = () => {
       </div>
       <div className="border-t border-border py-7 dark:border-darkmode-border">
         <div className="container text-center text-light dark:text-darkmode-light">
-          <div dangerouslySetInnerHTML={markdownify(copyright)} />
+          <div dangerouslySetInnerHTML={markdownify(content)} />
         </div>
       </div>
     </footer>

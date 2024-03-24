@@ -7,7 +7,7 @@ import Image from "next/image";
 import CharlesImage from "@/public/images/charles.jpg";
 
 const About = () => {
-  const data: RegularPage = getListPage("about/_index.md");
+  const data: RegularPage = getListPage("about.md");
   const { frontmatter, content } = data;
   const { title, meta_title, description, image } = frontmatter;
 

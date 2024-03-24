@@ -13,10 +13,6 @@
     "default_theme": "system"
   },
 
-  "params": {
-    "copyright": "Original design by [Zeon Studio](https://zeon.studio)\r\n\r\nModified and adapted by Patrick Moeller\r\n\r\nContent copyright Charles McAnany"
-  },
-
   "metadata": {
     "meta_author": "Charles McAnany",
     "meta_image": "/images/og-image.png",

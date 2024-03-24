@@ -3,9 +3,6 @@
     "person": {
       "photos": [
         {
-          "path": "/images/photos/smile.png"
-        },
-        {
           "path": "/images/photos/IMG_2380.JPG",
           "description": "Blah blah blah"
         }
