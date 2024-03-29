@@ -1,6 +1,10 @@
 {
   "files.associations": {
-    "*.mdx": "markdown"
+    "*.mdx": "markdown",
+    "dep5": "dep5"
   },
-  "css.customData": [".vscode/tailwind.json"]
+  "css.customData": [".vscode/tailwind.json"],
+  "[dep5]": {
+    "editor.formatOnSave": false
+  }
 }

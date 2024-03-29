@@ -1,0 +1,17 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: nextplate
+Upstream-Contact: Zeon Studio <https://zeon.studio/>
+Source: https://github.com/zeon-studio/nextplate/
+
+Files: *
+Copyright: 2022 - Present, Zeon Studio
+2024, Patrick Moeller
+License: MIT
+
+Files: public/images/photos/*
+Copyright: 2013, 2015 Charles McAnany <charlesmcanany-site@charlesmcanany.com>
+License: CC-BY-NC-SA-4.0
+
+Files: public/images/charles.jpg
+Copyright: 2015, Charles McAnany <charlesmcanany-site@charlesmcanany.com>
+License: CC-BY-NC-SA-4.0
