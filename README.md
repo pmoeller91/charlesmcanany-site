@@ -34,7 +34,15 @@ npm run build
 
 ## License
 
+### Code
+
+**Code License:** Released under the [MIT](LICENSE) license.
+
 Copyright (c) 2023 - Present, Template Designed & Developed by [Zeon Studio](https://zeon.studio/)
 Copyright (c) 2024, Patrick Moeller, Modified & adapted
 
-**Code License:** Released under the [MIT](LICENSE) license.
+### Photos
+
+**Photo License:** Photos released under the [CC-BY-NC-SA 4.0](LICENSES/CC-BY-NC-SA-4.0.txt) license.
+
+Copyright (c) 2012, 2015 Charles McAnany
