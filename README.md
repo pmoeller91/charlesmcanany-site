@@ -30,6 +30,9 @@ To build a production-ready build of the website, run the following command:
 npm run build
 ```
 
+The static build of the website will be output to the `/out` directory, and is
+ready to be hosted.
+
 <!-- licence -->
 
 ## License
