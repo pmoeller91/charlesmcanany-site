@@ -35,3 +35,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# static image optimizer generated images + hash file
+public/**/nextImageExportOptimizer/
+public/images/next-image-export-optimizer-hashes.json

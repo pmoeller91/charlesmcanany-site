@@ -16,7 +16,6 @@ module.exports = {
     "./src/content/**/*.{md,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx}",
   ],
-  safelist: [{ pattern: /^swiper-/ }],
   darkMode: "class",
   theme: {
     screens: {

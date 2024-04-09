@@ -5,7 +5,7 @@ import { titleify } from "@/src/lib/utils/textConverter";
 import DynamicIcon from "../helpers/DynamicIcon";
 
 import style from "./DirectoryTile.module.scss";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 
 interface DirectoryTileProps {
   directoryName: string;
@@ -19,7 +19,7 @@ function DirectoryTile({ directoryName, thumbnail }: DirectoryTileProps) {
         <div
           className={`absolute h-full w-full object-contain z-0 p-2 ${style["image-fade"]}`}
         >
-          <Image
+          <ExportedImage
             src={thumbnail.path}
             width={thumbnail.metadata.width}
             height={thumbnail.metadata.height}

@@ -2,7 +2,7 @@
 
 import config from "@/src/config/config.json";
 import { useTheme } from "next-themes";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import logo from "@/public/images/logo.png";
@@ -29,7 +29,7 @@ const Logo = ({ className }: LogoProps) => {
 
   return (
     <Link href="/" className="navbar-brand">
-      <Image src={resolvedLogo} alt={title} className={className} priority />
+      <ExportedImage src={resolvedLogo} alt={title} className={className} priority />
     </Link>
   );
 };

@@ -6,5 +6,7 @@
   "css.customData": [".vscode/tailwind.json"],
   "[dep5]": {
     "editor.formatOnSave": false
-  }
+  },
+  "liveServer.settings.multiRootWorkspaceName": "charlesmcanany-site",
+  "liveServer.settings.root": "/out"
 }

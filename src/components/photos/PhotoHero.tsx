@@ -1,5 +1,5 @@
 import { CombinedPhotoData } from "@/src/types/PhotoMetadata";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 
 import style from "./PhotoHero.module.scss";
 
@@ -9,7 +9,7 @@ interface PhotoHeroProps {
 
 function PhotoHero({ photo }: PhotoHeroProps) {
   return (
-    <Image
+    <ExportedImage
       src={photo.path}
       width={photo.metadata.width}
       height={photo.metadata.height}

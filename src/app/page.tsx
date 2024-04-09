@@ -3,7 +3,7 @@ import { getListPage } from "@/src/lib/contentParser";
 import { markdownify } from "@/src/lib/utils/textConverter";
 import SeoMeta from "@/src/components/partials/SeoMeta";
 import { RegularPage } from "@/src/types/RegularPage";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 
 const HomePage = () => {
   const data: RegularPage = getListPage("homepage.md");
@@ -17,7 +17,7 @@ const HomePage = () => {
           <div className="row justify-center">
             <div className="text-center md:col-10 lg:col-7">
               {image && (
-                <Image
+                <ExportedImage
                   className="mx-auto mb-6 rounded-lg"
                   src={image}
                   width={200}

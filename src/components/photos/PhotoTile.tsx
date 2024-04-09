@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import { Tile } from "./Tile";
 
 interface PhotoTileProps {
@@ -11,7 +11,7 @@ function PhotoTile({ src, width, height }: PhotoTileProps) {
   return (
     <Tile>
       <div className="h-full w-full flex flex-col justify-center">
-        <Image src={src} width={width} height={height} alt="photo" />
+        <ExportedImage src={src} width={width} height={height} alt="photo" />
       </div>
     </Tile>
   );
