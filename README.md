@@ -24,7 +24,7 @@ npm run dev
 
 ### Build
 
-To build a production-ready build of the website, run the following command:
+A production-ready build of the website can be built by running the following command:
 
 ```bash
 npm run build
@@ -32,6 +32,23 @@ npm run build
 
 The static build of the website will be output to the `/out` directory, and is
 ready to be hosted.
+
+#### Alternate Base Path
+
+If the website is going to be hosted in a sub-directory of a webserver, the
+`BASE_PATH` environment variable can be used to indicate that directory at
+build-time.
+
+For example, suppose the site was to be hosted at
+`https://charlesmcanany.com/new-site/` instead of `https://charlesmcanany.com/`.
+To do this, the following command can be used:
+
+```bash
+BASE_PATH="new-site/" npm run build
+```
+
+The generated files should now work as normal when placed into the corresponding
+web-server folder.
 
 <!-- licence -->
 

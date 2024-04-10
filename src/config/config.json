@@ -2,8 +2,7 @@
   "site": {
     "title": "CharlesMcAnany.com",
     "base_url": "https://charlesmcanany.com",
-    "base_path": "/",
-    "trailing_slash": false,
+    "trailing_slash": true,
     "favicon": "/images/favicon.ico"
   },
 

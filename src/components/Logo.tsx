@@ -2,11 +2,11 @@
 
 import config from "@/src/config/config.json";
 import { useTheme } from "next-themes";
-import ExportedImage from "next-image-export-optimizer";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import logo from "@/public/images/logo.png";
 import logoDark from "@/public/images/logo-darkmode.png";
+import ExportedImage from "next-image-export-optimizer";
 
 interface LogoProps {
   className?: string;

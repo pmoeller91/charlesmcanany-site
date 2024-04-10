@@ -1,7 +1,10 @@
 const config = require("./src/config/config.json");
 
+const basePath = process.env.BASE_PATH || "";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath,
   output: "export",
   images: {
     loader: "custom",
@@ -13,6 +16,7 @@ const nextConfig = {
   basePath: config.base_path !== "/" ? config.base_path : "",
   trailingSlash: config.site.trailing_slash,
   env: {
+    next_basePath: basePath,
     nextImageExportOptimizer_imageFolderPath: "public/images",
     nextImageExportOptimizer_exportFolderPath: "out",
     nextImageExportOptimizer_quality: "75",

@@ -101,6 +101,7 @@ const PhotosPage = ({ params }: PhotosPageProps) => {
                 src={photoData.metadata.path}
                 width={photoData.metadata.width}
                 height={photoData.metadata.height}
+                alt={`${photoData.title ? `Photo titled "${photoData.title}"` : "Untitled photo"}${photoData.metadata.exifData.createDate ? ` taken on ${photoData.metadata.exifData.createDate}` : ""}`}
               />
             </Link>
           ))}
